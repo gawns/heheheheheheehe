@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Produk - Ine Mebel Jepara</title>
+  <meta name="description" content="Detail mebel premium berkualitas tinggi buatan tangan pengrajin Jepara." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="apple-touch-icon" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="no-intro">
+
+  <!-- NAVBAR -->
+  <header id="navbar" class="navbar navbar--solid">
+    <div class="navbar__inner container">
+      <a href="index.html" class="navbar__logo" aria-label="Ine Mebel Jepara - Beranda">
+        <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+        <span class="logo-text">Ine Mebel Jepara</span>
+      </a>
+
+      <nav class="navbar__nav" aria-label="Navigasi utama">
+        <ul role="list">
+          <li><a href="katalog.html">Katalog</a></li>
+          <li><a href="index.html#tentang">Tentang</a></li>
+          <li><a href="index.html#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="nav-icon nav-wishlist" id="wishlist-toggle" aria-expanded="false" aria-controls="wishlist-panel" aria-label="Buka wishlist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="wishlist-badge" id="wishlist-badge" hidden>0</span>
+        </button>
+        <button class="nav-menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile" hidden>
+      <ul role="list">
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="index.html#tentang">Tentang</a></li>
+        <li><a href="index.html#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- WISHLIST DROPDOWN PANEL -->
+  <aside class="wishlist-panel" id="wishlist-panel" aria-label="Wishlist kamu" hidden>
+    <div class="wishlist-panel__header">
+      <h2 class="wishlist-panel__title">♥ Wishlist</h2>
+      <button class="wishlist-panel__clear" id="wishlist-clear" type="button">Kosongkan</button>
+    </div>
+    <div class="wishlist-panel__body" id="wishlist-items">
+      <!-- injected by script.js -->
+    </div>
+  </aside>
+
+  <main id="main-content">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+        <ol class="breadcrumb" role="list">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="katalog.html">Katalog</a></li>
+          <li aria-current="page" id="breadcrumb-product">Kursi Tamarind</li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- PRODUCT DETAIL -->
+    <section class="product-detail" aria-labelledby="product-name">
+      <div class="container product-detail__inner">
+
+        <!-- Gallery -->
+        <div class="product-gallery">
+          <div class="product-gallery__main">
+            <img
+              id="gallery-main-img"
+              src="img/produk-sofa-klasik-marun.jpeg"
+              alt="Sofa klasik marun - tampak depan"
+              width="900"
+              height="800"
+              fetchpriority="high"
+              class="product-gallery__main-img"
+            />
+          </div>
+          <div class="product-gallery__thumbs" id="product-thumbs-container" role="list" aria-label="Galeri foto produk">
+            <button class="thumb-btn active" aria-label="Foto 1 - tampak depan" aria-pressed="true">
+              <img src="img/produk-sofa-klasik-marun.jpeg" alt="" width="200" height="180" />
+            </button>
+            <button class="thumb-btn" aria-label="Foto 2 - sudut serong" aria-pressed="false">
+              <img src="img/produk-lemari-2-pintu-rotan.jpeg" alt="" width="200" height="180" />
+            </button>
+            <button class="thumb-btn" aria-label="Foto 3 - detail serat kayu" aria-pressed="false">
+              <img src="img/produk-lemari-3-pintu-rotan.jpeg" alt="" width="200" height="180" />
+            </button>
+            <button class="thumb-btn" aria-label="Foto 4 - ruang" aria-pressed="false">
+              <img src="img/produk-wa-01.jpeg" alt="" width="200" height="180" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <div class="product-info__meta">
+            <span class="product-info__code" id="product-code">#JPA-001</span>
+            <span class="product-info__category">Kursi</span>
+          </div>
+          <h1 class="product-info__name" id="product-name">Kursi Tamarind</h1>
+
+          <div class="product-info__rating" aria-label="Rating 4.8 dari 5">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span class="rating-score">4.8</span>
+            <span class="rating-count">(32 ulasan)</span>
+          </div>
+
+          <p class="product-info__price">
+            <span class="price-main">Rp 3.850.000</span>
+          </p>
+
+          <p class="product-info__desc">
+            Kursi makan bergaya modern dari kayu jati grade A. Rangka solid dengan konstruksi sambungan baji tradisional Jepara yang terbukti tahan puluhan tahun. Bantalan duduk berbahan busa high-density dibalut kain katun tenun alami, nyaman untuk penggunaan sehari-hari.
+          </p>
+
+          <!-- Material & Dimensi -->
+          <dl class="product-specs">
+            <div class="spec-row">
+              <dt>Dari Pohon / Kayu</dt>
+              <dd id="spec-material">Kayu jati grade A solid</dd>
+            </div>
+            <div class="spec-row">
+              <dt>Pilihan Warna</dt>
+              <dd id="spec-warna">Krem alami, Cokelat tembakau, Abu-abu premium, Hitam arang</dd>
+            </div>
+            <div class="spec-row">
+              <dt>Dimensi</dt>
+              <dd id="spec-dimensi">P 52 x L 55 x T 88 cm (tinggi dudukan 45 cm)</dd>
+            </div>
+            <div class="spec-row">
+              <dt>Berat</dt>
+              <dd id="spec-berat">8,5 kg</dd>
+            </div>
+            <div class="spec-row">
+              <dt>Finishing</dt>
+              <dd id="spec-finishing">Natural oil, semi-gloss</dd>
+            </div>
+            <div class="spec-row">
+              <dt>Garansi</dt>
+              <dd id="spec-garansi">5 tahun rangka, 1 tahun bantalan</dd>
+            </div>
+            <div class="spec-row">
+              <dt>Produk Pelengkap</dt>
+              <dd id="spec-pelengkap">Meja</dd>
+            </div>
+          </dl>
+
+          <!-- Varian warna -->
+          <div class="product-variants" id="product-variants-container">
+            <h2 class="variants-label">Pilihan varian warna</h2>
+            <div class="color-options" id="color-options-wrap" role="group" aria-label="Pilihan warna">
+              <button class="color-swatch active" style="--swatch-color: #D4C5A9;" data-color="Krem" aria-label="Krem alami" aria-pressed="true" title="Krem alami"></button>
+              <button class="color-swatch" style="--swatch-color: #8B7355;" data-color="Cokelat" aria-label="Cokelat tembakau" aria-pressed="false" title="Cokelat tembakau"></button>
+              <button class="color-swatch" style="--swatch-color: #9CA3AF;" data-color="Abu-abu" aria-label="Abu-abu premium" aria-pressed="false" title="Abu-abu premium"></button>
+              <button class="color-swatch" style="--swatch-color: #1F2937;" data-color="Hitam" aria-label="Hitam arang" aria-pressed="false" title="Hitam arang"></button>
+            </div>
+            <p class="variants-selected-label" id="variants-selected-text">Warna terpilih: <strong>Krem</strong></p>
+          </div>
+
+          <!-- Actions: Chat WhatsApp (Quantity removed) -->
+          <div class="product-actions">
+            <a
+              href="https://wa.me/6283114241995"
+              id="product-wa-order-btn"
+              class="btn btn--primary btn--lg product-wa-order-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Pesan via Chat WhatsApp"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+              <span>Chat WhatsApp</span>
+            </a>
+          </div>
+
+          <button class="wishlist-btn" aria-pressed="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Tambah ke Wishlist
+          </button>
+
+          <!-- CTA konsultasi -->
+          <div class="consult-cta">
+            <p>Butuh bantuan memilih produk?</p>
+            <a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel%20Ine%20Mebel%20Jepara." class="btn btn--outline" target="_blank" rel="noopener noreferrer">Tanya via WhatsApp</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ULASAN PRODUK -->
+    <section class="product-reviews" aria-labelledby="reviews-heading">
+      <div class="container">
+        <h2 class="section-heading" id="reviews-heading">Ulasan Pembeli</h2>
+        <div class="reviews-list" id="reviews-list">
+          <p class="empty-state">Memuat ulasan...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUK TERKAIT -->
+    <section class="related-products" aria-labelledby="related-heading">
+      <div class="container">
+        <h2 class="section-heading" id="related-heading">Produk Terkait</h2>
+        <div class="product-grid" id="related-grid">
+          <!-- Injected by script.js -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="kontak">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo" aria-label="Ine Mebel Jepara - Beranda">
+          <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+          <span>Ine Mebel Jepara</span>
+        </a>
+        <p class="footer__tagline">Mebel berkualitas dari tangan pengrajin Jepara sejak 2012.</p>
+      </div>
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Produk</h3>
+        <ul role="list">
+          <li><a href="katalog.html?kategori=kursi">Kursi</a></li>
+          <li><a href="katalog.html?kategori=meja">Meja</a></li>
+          <li><a href="katalog.html?kategori=sofa">Sofa</a></li>
+          <li><a href="katalog.html?kategori=lemari">Lemari</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Perusahaan</h3>
+        <ul role="list">
+          <li><a href="index.html#tentang">Tentang kami</a></li>
+          <li><a href="#">Cara pemesanan</a></li>
+          <li><a href="#">Kebijakan pengiriman</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h3 class="footer__nav-title">Kontak</h3>
+        <address>
+          <p>RT.27/RW.06, Bawu III, Bawu, Kec. Batealit, Kabupaten Jepara, Jawa Tengah 59461</p>
+          <p><a href="https://wa.me/6283114241995" target="_blank" rel="noopener noreferrer">0831-1424-1995</a></p>
+          <p><a href="https://instagram.com/mebel.jepara" target="_blank" rel="noopener noreferrer">@mebel.jepara</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2026 Ine Mebel Jepara. Semua hak dilindungi.</p>
+        <a href="admin.html" class="footer__admin-link">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel." class="fab-whatsapp" id="fab-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Hubungi kami via WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <a href="admin.html" class="fab-admin" aria-label="Buka panel admin">
+    <img class="fab-admin__mark" src="img/logo.jpeg" alt="" aria-hidden="true" style="object-fit:cover" />
+    Admin
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

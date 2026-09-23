@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Env & rahasia (JANGAN commit password DB)
+.env
+*.env
+
+# Log sementara
+*.log
+server*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

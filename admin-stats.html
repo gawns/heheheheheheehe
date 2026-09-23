@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistik - Panel Admin Ine Mebel Jepara</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="apple-touch-icon" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="no-intro admin-body">
+
+  <!-- LOGIN GATE -->
+  <div class="admin-gate" id="admin-gate" hidden></div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div class="admin-dashboard" id="admin-dashboard" hidden>
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" aria-label="Navigasi admin">
+      <div class="admin-sidebar__brand">
+        <a href="index.html" class="navbar__logo" aria-label="Ine Mebel Jepara - Beranda">
+          <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+          <span class="logo-text">Ine Mebel Jepara</span>
+        </a>
+        <span class="admin-sidebar__tag">Panel Admin</span>
+      </div>
+
+      <nav class="admin-sidebar__nav" aria-label="Menu admin">
+        <a href="admin.html" class="admin-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Produk
+        </a>
+        <a href="admin-stats.html" class="admin-nav-link active" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Statistik
+        </a>
+        <a href="admin-ulasan.html" class="admin-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Ulasan
+        </a>
+        <a href="index.html" class="admin-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Lihat Situs
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main" id="stats-panel">
+      <div class="admin-topbar">
+        <div>
+          <h1 class="admin-topbar__title">Statistik &amp; Analitik</h1>
+          <p class="admin-topbar__sub">Kunjungan harian, produk terpopuler, dan tren favorit.</p>
+        </div>
+        <div class="admin-topbar__actions">
+          <select id="stats-range" class="form-input form-select stats-range" aria-label="Rentang hari statistik">
+            <option value="7" selected>7 hari terakhir</option>
+            <option value="14">14 hari terakhir</option>
+            <option value="30">30 hari terakhir</option>
+            <option value="90">90 hari terakhir</option>
+          </select>
+          <button type="button" class="btn btn--secondary" id="btn-refresh-stats">Muat Ulang</button>
+        </div>
+      </div>
+
+      <!-- Kartu angka utama -->
+      <div class="stats-cards" id="stats-cards" aria-live="polite"></div>
+
+      <div class="stats-grid">
+        <div class="stats-block">
+          <h3 class="stats-block__title">Kunjungan Harian</h3>
+          <div class="stats-chart" id="stats-visits-chart" role="img" aria-label="Grafik kunjungan harian"></div>
+        </div>
+        <div class="stats-block">
+          <h3 class="stats-block__title">Tren Favorit (♥ ditambahkan vs dihapus)</h3>
+          <div class="stats-chart" id="stats-fav-chart" role="img" aria-label="Grafik tren favorit"></div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stats-block">
+          <h3 class="stats-block__title">Produk Terpopuler</h3>
+          <div class="stats-list" id="stats-popular" aria-live="polite"></div>
+        </div>
+        <div class="stats-block">
+          <h3 class="stats-block__title">Sebaran Kategori</h3>
+          <div class="stats-list" id="stats-categories" aria-live="polite"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="admin-common.js"></script>
+  <script src="admin-stats.js"></script>
+</body>
+</html>

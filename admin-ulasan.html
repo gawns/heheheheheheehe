@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ulasan - Panel Admin Ine Mebel Jepara</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="apple-touch-icon" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="no-intro admin-body">
+
+  <!-- LOGIN GATE -->
+  <div class="admin-gate" id="admin-gate" hidden></div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div class="admin-dashboard" id="admin-dashboard" hidden>
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" aria-label="Navigasi admin">
+      <div class="admin-sidebar__brand">
+        <a href="index.html" class="navbar__logo" aria-label="Ine Mebel Jepara - Beranda">
+          <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+          <span class="logo-text">Ine Mebel Jepara</span>
+        </a>
+        <span class="admin-sidebar__tag">Panel Admin</span>
+      </div>
+
+      <nav class="admin-sidebar__nav" aria-label="Menu admin">
+        <a href="admin.html" class="admin-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Produk
+        </a>
+        <a href="admin-stats.html" class="admin-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Statistik
+        </a>
+        <a href="admin-ulasan.html" class="admin-nav-link active" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Ulasan
+        </a>
+        <a href="index.html" class="admin-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Lihat Situs
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main" id="halaman-ulasan">
+      <div class="admin-topbar">
+        <div>
+          <h1 class="admin-topbar__title">Kelola Ulasan</h1>
+          <p class="admin-topbar__sub">Tambah dan hapus ulasan pembeli untuk tiap produk.</p>
+        </div>
+        <div class="admin-topbar__actions">
+          <button type="button" class="btn btn--secondary" id="btn-refresh-reviews">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Muat Ulang
+          </button>
+        </div>
+      </div>
+      <!-- FORM TAMBAH ULASAN -->
+      <section class="admin-form-card">
+        <div class="admin-form-card__header">
+          <h2 class="admin-form-card__title">Tambah Ulasan Baru</h2>
+        </div>
+        <form id="review-form" class="admin-product-form" novalidate>
+          <fieldset class="form-section">
+            <legend>Detail Ulasan</legend>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="review-product" class="form-label">Produk <span class="required">*</span></label>
+                <select id="review-product" class="form-input form-select" required>
+                  <option value="">Memuat produk...</option>
+                </select>
+                <p class="form-hint">Pilih produk yang diulas (ditampilkan dengan SKU).</p>
+              </div>
+              <div class="form-field">
+                <label for="review-rating" class="form-label">Rating <span class="required">*</span></label>
+                <select id="review-rating" class="form-input form-select" required>
+                  <option value="5" selected>5 - Sangat bagus</option>
+                  <option value="4">4 - Bagus</option>
+                  <option value="3">3 - Cukup</option>
+                  <option value="2">2 - Kurang</option>
+                  <option value="1">1 - Buruk</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="review-name" class="form-label">Nama Pengulas <span class="required">*</span></label>
+                <input type="text" id="review-name" class="form-input" placeholder="Mis. Budi Santoso" required autocomplete="off" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="review-comment" class="form-label">Isi Ulasan <span class="required">*</span></label>
+              <textarea id="review-comment" class="form-input form-textarea" rows="3" required placeholder="Tuliskan pengalaman pembeli..."></textarea>
+            </div>
+          </fieldset>
+
+          <p class="form-error" id="review-form-error" role="alert" hidden></p>
+          <div class="admin-form-actions">
+            <button type="submit" class="btn btn--primary" id="btn-save-review">Simpan Ulasan</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- DAFTAR ULASAN -->
+      <section class="admin-list-card">
+        <div class="admin-list-toolbar">
+          <div class="admin-search-wrap">
+            <svg class="admin-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="review-search" class="form-input admin-search-input" placeholder="Cari nama pengulas, SKU, atau isi ulasan..." aria-label="Cari ulasan" />
+          </div>
+        </div>
+        <div id="review-table-wrap" aria-live="polite">
+          <div class="admin-empty"><p>Memuat ulasan...</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- DIALOG KONFIRMASI HAPUS -->
+  <dialog class="confirm-dialog" id="delete-review-dialog" aria-labelledby="delete-review-title">
+    <h2 class="confirm-dialog__title" id="delete-review-title">Hapus ulasan ini?</h2>
+    <p class="confirm-dialog__body" id="delete-review-body"></p>
+    <div class="confirm-dialog__actions">
+      <button type="button" class="btn btn--secondary" data-dialog-cancel>Batal</button>
+      <button type="button" class="btn btn--danger" data-dialog-confirm>Ya, Hapus</button>
+    </div>
+  </dialog>
+
+  <script src="admin-common.js"></script>
+  <script src="admin-ulasan.js"></script>
+</body>
+</html>

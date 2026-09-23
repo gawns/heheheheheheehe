@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ine Mebel Jepara - Katalog Mebel Premium</title>
+  <meta name="description" content="Koleksi mebel premium berkualitas tinggi. Kursi, meja, sofa, dan lemari dengan material terbaik dari Jepara." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;600&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="apple-touch-icon" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  <header id="navbar" class="navbar">
+    <div class="navbar__inner container">
+      <a href="index.html" class="navbar__logo" aria-label="Ine Mebel Jepara - Beranda">
+        <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+        <span class="logo-text">Ine Mebel Jepara</span>
+      </a>
+
+      <nav class="navbar__nav" aria-label="Navigasi utama">
+        <ul role="list">
+          <li><a href="katalog.html">Katalog</a></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="nav-icon nav-wishlist" id="wishlist-toggle" aria-expanded="false" aria-controls="wishlist-panel" aria-label="Buka wishlist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="wishlist-badge" id="wishlist-badge" hidden>0</span>
+        </button>
+        <button class="nav-menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile" hidden>
+      <ul role="list">
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- WISHLIST DROPDOWN PANEL -->
+  <aside class="wishlist-panel" id="wishlist-panel" aria-label="Wishlist kamu" hidden>
+    <div class="wishlist-panel__header">
+      <h2 class="wishlist-panel__title">♥ Wishlist</h2>
+      <button class="wishlist-panel__clear" id="wishlist-clear" type="button">Kosongkan</button>
+    </div>
+    <div class="wishlist-panel__body" id="wishlist-items">
+      <!-- injected by script.js -->
+    </div>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-headline">
+      <div class="hero__inner container">
+        <div class="hero__text">
+          <h1 class="hero__headline" id="hero-headline">
+            Ruang yang<br />
+            <em>Bercerita</em>
+          </h1>
+          <p class="hero__desc">
+            Mebel dibuat tangan oleh pengrajin Jepara, dari kayu jati pilihan.
+            Setiap sudut rumah Anda layak mendapat yang terbaik.
+          </p>
+          <a href="katalog.html" class="btn btn--primary btn--lg">Lihat Katalog</a>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__img-wrap parallax-card" data-parallax data-depth="18">
+            <img
+              src="img/produk-sofa-klasik-marun.jpeg"
+              alt="Sofa premium di ruang tamu modern"
+              width="900"
+              height="700"
+              fetchpriority="high"
+              class="hero__img"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative scroll indicator -->
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- KATEGORI UNGGULAN -->
+    <section class="categories" aria-labelledby="cat-heading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-heading" id="cat-heading">Jelajahi Koleksi</h2>
+          <p class="section-sub">Pilih kategori yang sesuai kebutuhan ruang Anda</p>
+        </header>
+
+        <ul class="categories__grid" role="list">
+          <li class="cat-card parallax-card" data-parallax data-depth="12">
+            <a href="katalog.html?kategori=kursi" class="cat-card__link" aria-label="Lihat koleksi kursi">
+              <div class="cat-card__img-wrap">
+                <img src="img/produk-wa-03.jpeg" alt="Kursi kayu jati bergaya modern" width="600" height="500" loading="lazy" />
+              </div>
+              <div class="cat-card__info">
+                <h3 class="cat-card__name">Kursi</h3>
+                <span class="cat-card__count">0</span>
+              </div>
+            </a>
+          </li>
+          <li class="cat-card parallax-card" data-parallax data-depth="12">
+            <a href="katalog.html?kategori=meja" class="cat-card__link" aria-label="Lihat koleksi meja">
+              <div class="cat-card__img-wrap">
+                <img src="img/produk-wa-02.jpeg" alt="Meja kerja kayu solid minimalis" width="600" height="500" loading="lazy" />
+              </div>
+              <div class="cat-card__info">
+                <h3 class="cat-card__name">Meja</h3>
+                <span class="cat-card__count">0</span>
+              </div>
+            </a>
+          </li>
+          <li class="cat-card parallax-card" data-parallax data-depth="12">
+            <a href="katalog.html?kategori=sofa" class="cat-card__link" aria-label="Lihat koleksi sofa">
+              <div class="cat-card__img-wrap">
+                <img src="img/produk-sofa-klasik-marun.jpeg" alt="Sofa tiga dudukan berbahan kain premium" width="600" height="500" loading="lazy" />
+              </div>
+              <div class="cat-card__info">
+                <h3 class="cat-card__name">Sofa</h3>
+                <span class="cat-card__count">0</span>
+              </div>
+            </a>
+          </li>
+          <li class="cat-card parallax-card" data-parallax data-depth="12">
+            <a href="katalog.html?kategori=lemari" class="cat-card__link" aria-label="Lihat koleksi lemari">
+              <div class="cat-card__img-wrap">
+                <img src="img/produk-lemari-2-pintu-rotan.jpeg" alt="Lemari pakaian kayu dengan detail ukiran" width="600" height="500" loading="lazy" />
+              </div>
+              <div class="cat-card__info">
+                <h3 class="cat-card__name">Lemari</h3>
+                <span class="cat-card__count">0</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PRODUK UNGGULAN (preview katalog) -->
+    <section class="featured" aria-labelledby="featured-heading">
+      <div class="container">
+        <header class="section-header section-header--row">
+          <h2 class="section-heading" id="featured-heading">Produk Pilihan</h2>
+          <a href="katalog.html" class="link-cta">Lihat semua produk</a>
+        </header>
+
+        <div class="product-grid" id="featured-grid">
+          <!-- Product cards injected by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TENTANG / BRAND STORY -->
+    <section class="about" id="tentang" aria-labelledby="about-heading">
+      <div class="container about__inner">
+        <div class="about__img-wrap">
+          <img
+            src="img/produk-wa-05.jpeg"
+            alt="Pengrajin sedang mengukir kayu jati di bengkel"
+            width="750"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+        <div class="about__text">
+          <p class="about__label">Tentang kami</p>
+          <h2 class="about__heading" id="about-heading">
+            Dibuat dengan tangan,<br />dirancang untuk generasi
+          </h2>
+          <p class="about__body">
+            Sejak 2012, Ine Mebel Jepara menghadirkan mebel kayu jati grade A yang dibuat oleh pengrajin lokal berpengalaman. Kami percaya furnitur bukan sekadar benda - ia adalah bagian dari cerita keluarga Anda.
+          </p>
+          <p class="about__body">
+            Setiap produk melewati proses seleksi kayu, pengeringan alami, dan finishing tangan sebelum tiba di rumah Anda. Bukan produksi massal - karena kualitas membutuhkan waktu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section class="testimonials" aria-labelledby="testi-heading">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-heading" id="testi-heading">Cerita Pelanggan</h2>
+        </header>
+
+        <div class="testi-marquee" role="region" aria-label="Testimoni pelanggan - bergulir otomatis, arahkan kursor untuk jeda">
+          <div class="testi-track">
+            <figure class="testi-card">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Sofa yang kami beli sudah 3 tahun dan masih seperti baru. Kualitas jahitan dan rangkanya luar biasa. Pengirimannya juga profesional, dikemas dengan sangat hati-hati.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">SR</div>
+                <div>
+                  <strong>Sari Rahayu</strong>
+                  <span>Jakarta Selatan</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Meja makan dari kayu jati yang kami pesan benar-benar menjadi pusat perhatian ruang makan kami. Ukurannya pas, warnanya indah, dan terasa sangat kokoh.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">BW</div>
+                <div>
+                  <strong>Budi Wicaksono</strong>
+                  <span>Surabaya</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Pelayanan tim Ine Mebel Jepara sangat responsif. Saya bisa kustomisasi ukuran lemari sesuai kebutuhan, dan hasilnya melebihi ekspektasi saya.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">DN</div>
+                <div>
+                  <strong>Dian Novita</strong>
+                  <span>Bandung</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Kursi Tamarind-nya nyaman banget dan finishing-nya halus. Dikirim ke Semarang cuma 4 hari, tanpa lecet sedikit pun. Recommended!
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">AP</div>
+                <div>
+                  <strong>Andi Prasetyo</strong>
+                  <span>Semarang</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Sofa Havana jadi favorit keluarga di rumah. Busanya premium, kaki kayunya kokoh. Sudah 2 tahun dipakai sehari-hari dan masih terlihat mewah.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">MK</div>
+                <div>
+                  <strong>Maya Kusuma</strong>
+                  <span>Yogyakarta</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Dari konsultasi awal sampai pengiriman semuanya transparan. Timnya sabar menjawab pertanyaan saya yang banyak. Puas sekali dengan pembelian ini.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">RH</div>
+                <div>
+                  <strong>Rizal Hakim</strong>
+                  <span>Malang</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <!-- SET 2 (duplikat untuk loop mulus) -->
+            <figure class="testi-card" aria-hidden="true">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Sofa yang kami beli sudah 3 tahun dan masih seperti baru. Kualitas jahitan dan rangkanya luar biasa. Pengirimannya juga profesional, dikemas dengan sangat hati-hati.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">SR</div>
+                <div>
+                  <strong>Sari Rahayu</strong>
+                  <span>Jakarta Selatan</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card" aria-hidden="true">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Meja makan dari kayu jati yang kami pesan benar-benar menjadi pusat perhatian ruang makan kami. Ukurannya pas, warnanya indah, dan terasa sangat kokoh.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">BW</div>
+                <div>
+                  <strong>Budi Wicaksono</strong>
+                  <span>Surabaya</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card" aria-hidden="true">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Pelayanan tim Ine Mebel Jepara sangat responsif. Saya bisa kustomisasi ukuran lemari sesuai kebutuhan, dan hasilnya melebihi ekspektasi saya.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">DN</div>
+                <div>
+                  <strong>Dian Novita</strong>
+                  <span>Bandung</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card" aria-hidden="true">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Kursi Tamarind-nya nyaman banget dan finishing-nya halus. Dikirim ke Semarang cuma 4 hari, tanpa lecet sedikit pun. Recommended!
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">AP</div>
+                <div>
+                  <strong>Andi Prasetyo</strong>
+                  <span>Semarang</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card" aria-hidden="true">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Sofa Havana jadi favorit keluarga di rumah. Busanya premium, kaki kayunya kokoh. Sudah 2 tahun dipakai sehari-hari dan masih terlihat mewah.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">MK</div>
+                <div>
+                  <strong>Maya Kusuma</strong>
+                  <span>Yogyakarta</span>
+                </div>
+              </figcaption>
+            </figure>
+
+            <figure class="testi-card" aria-hidden="true">
+              <blockquote class="testi-card__quote">
+                <span class="testi-card__mark" aria-hidden="true">"</span>
+                Dari konsultasi awal sampai pengiriman semuanya transparan. Timnya sabar menjawab pertanyaan saya yang banyak. Puas sekali dengan pembelian ini.
+              </blockquote>
+              <figcaption class="testi-card__author">
+                <div class="testi-card__avatar" aria-hidden="true">RH</div>
+                <div>
+                  <strong>Rizal Hakim</strong>
+                  <span>Malang</span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA PENUTUP -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <div class="container cta-section__inner">
+        <div class="cta-section__text">
+          <h2 class="cta-section__heading" id="cta-heading">
+            Siap menghadirkan<br />sentuhan baru di rumah Anda?
+          </h2>
+          <p class="cta-section__sub">
+            Kunjungi showroom kami atau konsultasikan kebutuhan mebel Anda langsung dengan tim kami.
+          </p>
+          <div class="cta-section__actions">
+            <a href="katalog.html" class="btn btn--white">Lihat Katalog</a>
+            <a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel." class="btn btn--outline-white" target="_blank" rel="noopener noreferrer">Hubungi Kami</a>
+          </div>
+        </div>
+        <div class="cta-section__img-wrap" aria-hidden="true">
+          <img
+            src="img/produk-wa-06.jpeg"
+            alt=""
+            width="600"
+            height="450"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK SHOWROOM & WORKSHOP -->
+    <section class="contact-section" id="kontak" aria-labelledby="contact-heading">
+      <div class="container">
+        <header class="section-header text-center">
+          <p class="contact-section__eyebrow">&gt;_ Hubungi &amp; Konsultasi</p>
+          <h2 class="section-heading" id="contact-heading">Layanan &amp; Showroom Kami</h2>
+          <p class="section-sub">Konsultasikan kebutuhan perabot rumah impian Anda langsung dengan pengrajin kami di Jepara</p>
+        </header>
+
+        <div class="contact-grid">
+          <!-- Card 1: WhatsApp Fast Response -->
+          <div class="contact-card contact-card--highlight">
+            <div class="contact-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </div>
+            <h3 class="contact-card__title">Chat WhatsApp Langsung</h3>
+            <p class="contact-card__desc">Tanya estimasi harga, kirim foto inspirasi custom, atau cek ketersediaan stok kayu dengan respon tercepat.</p>
+            <p class="contact-card__value">0831-1424-1995</p>
+            <a href="https://wa.me/6283114241995?text=Halo%20Ine%20Mebel%20Jepara%2C%20saya%20ingin%20konsultasi%20pemesanan%20mebel." target="_blank" rel="noopener noreferrer" class="btn btn--primary contact-card__btn">
+              Chat WhatsApp Sekarang
+            </a>
+          </div>
+
+          <!-- Card 2: Showroom & Workshop -->
+          <div class="contact-card">
+            <div class="contact-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3 class="contact-card__title">Workshop &amp; Showroom</h3>
+            <p class="contact-card__desc">Kunjungi bengkel ukir dan showroom display kami untuk melihat kualitas kayu jati dan finishing secara langsung.</p>
+            <address class="contact-card__value">RT.27/RW.06, Bawu III, Bawu, Kec. Batealit, Kabupaten Jepara, Jawa Tengah 59461</address>
+            <a href="https://maps.google.com/?q=Jepara,+Jawa+Tengah" target="_blank" rel="noopener noreferrer" class="btn btn--outline contact-card__btn">
+              Buka Google Maps
+            </a>
+          </div>
+
+          <!-- Card 3: Jam Kerja & Konsultasi -->
+          <div class="contact-card">
+            <div class="contact-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="contact-card__title">Jam Kerja &amp; Operasional</h3>
+            <p class="contact-card__desc">Tim pengrajin dan customer support kami siap melayani pesanan Anda setiap hari.</p>
+            <ul class="contact-card__schedule" role="list">
+              <li><span>Senin - Sabtu:</span> <strong>08.00 - 17.00 WIB</strong></li>
+              <li><span>Minggu / Libur:</span> <strong>09.00 - 15.00 WIB</strong></li>
+              <li><span>Chat WhatsApp:</span> <strong class="text-neon">Layanan 24 Jam</strong></li>
+            </ul>
+          </div>
+
+          <!-- Card 4: Media Sosial & Email -->
+          <div class="contact-card">
+            <div class="contact-card__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </div>
+            <h3 class="contact-card__title">Sosial Media &amp; Portofolio</h3>
+            <p class="contact-card__desc">Ikuti update pengerjaan produk custom, testimoni instalasi mebel di rumah klien, dan katalog video terbaru.</p>
+            <div class="contact-card__links">
+              <a href="https://instagram.com/mebel.jepara" target="_blank" rel="noopener noreferrer" class="contact-card__link">
+                <span>Instagram:</span> <strong>@mebel.jepara</strong>
+              </a>
+              <a href="mailto:info@inemebeljepara.com" class="contact-card__link">
+                <span>Email:</span> <strong>info@inemebeljepara.com</strong>
+              </a>
+            </div>
+            <a href="https://instagram.com/mebel.jepara" target="_blank" rel="noopener noreferrer" class="btn btn--outline contact-card__btn">
+              Kunjungi Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo" aria-label="Ine Mebel Jepara - Beranda">
+          <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+          <span>Ine Mebel Jepara</span>
+        </a>
+        <p class="footer__tagline">Mebel berkualitas dari tangan pengrajin Jepara sejak 2012.</p>
+        <div class="footer__social">
+          <a href="https://instagram.com/mebel.jepara" target="_blank" rel="noopener noreferrer" aria-label="Ikuti kami di Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/6283114241995" target="_blank" rel="noopener noreferrer" aria-label="Hubungi via WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Produk</h3>
+        <ul role="list">
+          <li><a href="katalog.html?kategori=kursi">Kursi</a></li>
+          <li><a href="katalog.html?kategori=meja">Meja</a></li>
+          <li><a href="katalog.html?kategori=sofa">Sofa</a></li>
+          <li><a href="katalog.html?kategori=lemari">Lemari</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Perusahaan</h3>
+        <ul role="list">
+          <li><a href="#tentang">Tentang kami</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+          <li><a href="admin.html">Panel Admin</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contact">
+        <h3 class="footer__nav-title">Showroom Jepara</h3>
+        <address>
+          <p>RT.27/RW.06, Bawu III, Bawu, Kec. Batealit, Kabupaten Jepara, Jawa Tengah 59461</p>
+          <p><a href="https://wa.me/6283114241995">WA: 0831-1424-1995</a></p>
+          <p><a href="https://instagram.com/mebel.jepara">IG: @mebel.jepara</a></p>
+        </address>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2026 Ine Mebel Jepara. Semua hak dilindungi.</p>
+        <a href="admin.html" class="footer__admin-link">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a
+    href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel."
+    class="fab-whatsapp"
+    id="fab-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Hubungi kami via WhatsApp"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

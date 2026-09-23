@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katalog Mebel - Ine Mebel Jepara</title>
+  <meta name="description" content="Jelajahi koleksi lengkap mebel premium Ine Mebel Jepara - kursi, meja, sofa, lemari, dan aksesori rumah." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="apple-touch-icon" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="no-intro">
+
+  <!-- NAVBAR -->
+  <header id="navbar" class="navbar navbar--solid">
+    <div class="navbar__inner container">
+      <a href="index.html" class="navbar__logo" aria-label="Ine Mebel Jepara - Beranda">
+        <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+        <span class="logo-text">Ine Mebel Jepara</span>
+      </a>
+
+      <nav class="navbar__nav" aria-label="Navigasi utama">
+        <ul role="list">
+          <li><a href="katalog.html" aria-current="page">Katalog</a></li>
+          <li><a href="index.html#tentang">Tentang</a></li>
+          <li><a href="index.html#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="nav-icon nav-wishlist" id="wishlist-toggle" aria-expanded="false" aria-controls="wishlist-panel" aria-label="Buka wishlist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="wishlist-badge" id="wishlist-badge" hidden>0</span>
+        </button>
+        <button class="nav-menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile" hidden>
+      <ul role="list">
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="index.html#tentang">Tentang</a></li>
+        <li><a href="index.html#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- WISHLIST DROPDOWN PANEL -->
+  <aside class="wishlist-panel" id="wishlist-panel" aria-label="Wishlist kamu" hidden>
+    <div class="wishlist-panel__header">
+      <h2 class="wishlist-panel__title">♥ Wishlist</h2>
+      <button class="wishlist-panel__clear" id="wishlist-clear" type="button">Kosongkan</button>
+    </div>
+    <div class="wishlist-panel__body" id="wishlist-items">
+      <!-- injected by script.js -->
+    </div>
+  </aside>
+
+  <main id="main-content">
+    <!-- Page Header -->
+    <section class="page-hero">
+      <div class="container">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb" role="list">
+            <li><a href="index.html">Beranda</a></li>
+            <li aria-current="page">Katalog</li>
+          </ol>
+        </nav>
+        <h1 class="page-hero__title">Katalog Produk</h1>
+        <p class="page-hero__sub">Temukan mebel yang sempurna untuk setiap sudut rumah Anda</p>
+      </div>
+    </section>
+
+    <!-- Filter & Grid -->
+    <section class="catalog-section" aria-labelledby="catalog-heading">
+      <div class="container">
+        <div class="catalog-layout">
+
+          <!-- Filter Sidebar (desktop) -->
+          <aside class="catalog-sidebar" aria-label="Filter produk">
+            <div class="sidebar-section">
+              <h2 class="sidebar-title" id="catalog-heading">Kategori</h2>
+              <ul class="sidebar-filter-list" role="list">
+                <li><button class="sidebar-filter-btn active" data-filter="semua">Semua <span class="filter-count">0</span></button></li>
+                <li><button class="sidebar-filter-btn" data-filter="kursi">Kursi <span class="filter-count">0</span></button></li>
+                <li><button class="sidebar-filter-btn" data-filter="meja">Meja <span class="filter-count">0</span></button></li>
+                <li><button class="sidebar-filter-btn" data-filter="sofa">Sofa <span class="filter-count">0</span></button></li>
+                <li><button class="sidebar-filter-btn" data-filter="lemari">Lemari <span class="filter-count">0</span></button></li>
+              </ul>
+            </div>
+
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Harga</h3>
+              <ul class="sidebar-filter-list" role="list">
+                <li><button class="sidebar-filter-btn" data-price="0-2000000">Di bawah Rp 2 juta</button></li>
+                <li><button class="sidebar-filter-btn" data-price="2000000-5000000">Rp 2 - 5 juta</button></li>
+                <li><button class="sidebar-filter-btn" data-price="5000000-10000000">Rp 5 - 10 juta</button></li>
+                <li><button class="sidebar-filter-btn" data-price="10000000+">Di atas Rp 10 juta</button></li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Main catalog area -->
+          <div class="catalog-main">
+            <!-- Mobile filter pills -->
+            <div class="filter-pills" role="group" aria-label="Filter kategori">
+              <button class="pill active" data-filter="semua">Semua</button>
+              <button class="pill" data-filter="kursi">Kursi</button>
+              <button class="pill" data-filter="meja">Meja</button>
+              <button class="pill" data-filter="sofa">Sofa</button>
+              <button class="pill" data-filter="lemari">Lemari</button>
+            </div>
+
+            <div class="catalog-toolbar">
+              <p class="catalog-count" id="catalog-count" aria-live="polite">Menampilkan <strong>12</strong> produk</p>
+              <div class="catalog-toolbar__controls">
+                <label class="sort-label" for="per-page-select">Tampilkan:
+                  <select id="per-page-select" class="sort-select">
+                    <option value="12" selected>12</option>
+                    <option value="24">24</option>
+                    <option value="100">100</option>
+                  </select>
+                </label>
+                <label class="sort-label" for="sort-select">Urutkan:
+                  <select id="sort-select" class="sort-select">
+                    <option value="newest">Terbaru</option>
+                    <option value="price-asc">Harga: Rendah ke Tinggi</option>
+                    <option value="price-desc">Harga: Tinggi ke Rendah</option>
+                    <option value="name">Nama A-Z</option>
+                    <option value="stock">Stok Terbanyak</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <!-- Status filter pills -->
+            <div class="status-pills" role="group" aria-label="Filter status produk">
+              <button class="status-pill active" data-status="aktif">Aktif</button>
+              <button class="status-pill" data-status="semua">Semua</button>
+              <button class="status-pill" data-status="draft">Draft</button>
+              <button class="status-pill" data-status="nonaktif">Nonaktif</button>
+            </div>
+
+            <div class="product-grid" id="catalog-grid">
+              <!-- Product cards injected by script.js -->
+            </div>
+
+            <div class="catalog-pagination" id="catalog-pagination">
+              <button class="btn btn--secondary" id="load-more-btn">Muat lebih banyak</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (same as index) -->
+  <footer class="footer" id="kontak">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo" aria-label="Ine Mebel Jepara - Beranda">
+          <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+          <span>Ine Mebel Jepara</span>
+        </a>
+        <p class="footer__tagline">Mebel berkualitas dari tangan pengrajin Jepara sejak 2012.</p>
+        <div class="footer__social">
+          <a href="https://instagram.com/mebel.jepara" target="_blank" rel="noopener noreferrer" aria-label="Instagram @mebel.jepara">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/6283114241995" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp 0831-1424-1995">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Produk</h3>
+        <ul role="list">
+          <li><a href="katalog.html?kategori=kursi">Kursi</a></li>
+          <li><a href="katalog.html?kategori=meja">Meja</a></li>
+          <li><a href="katalog.html?kategori=sofa">Sofa</a></li>
+          <li><a href="katalog.html?kategori=lemari">Lemari</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Perusahaan</h3>
+        <ul role="list">
+          <li><a href="index.html#tentang">Tentang kami</a></li>
+          <li><a href="#">Cara pemesanan</a></li>
+          <li><a href="#">Kebijakan pengiriman</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h3 class="footer__nav-title">Kontak</h3>
+        <address>
+          <p>RT.27/RW.06, Bawu III, Bawu, Kec. Batealit, Kabupaten Jepara, Jawa Tengah 59461</p>
+          <p><a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel." target="_blank" rel="noopener noreferrer">0831-1424-1995</a></p>
+          <p><a href="https://instagram.com/mebel.jepara" target="_blank" rel="noopener noreferrer">@mebel.jepara</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2026 Ine Mebel Jepara. Semua hak dilindungi.</p>
+        <a href="admin.html" class="footer__admin-link">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel." class="fab-whatsapp" id="fab-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Hubungi kami via WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
