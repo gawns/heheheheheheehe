@@ -18,6 +18,7 @@ Endpoint API (JSON):
 
 import os
 import re
+import sys
 import time
 
 from flask import Flask, jsonify, request, send_from_directory, abort
@@ -33,6 +34,16 @@ UPLOAD_URL_PREFIX = getattr(config, "UPLOAD_URL", "img").strip("/")
 MAX_UPLOAD_BYTES = int(getattr(config, "MAX_UPLOAD_MB", 5)) * 1024 * 1024
 ALLOWED_IMAGE_EXTS = tuple(getattr(config, "ALLOWED_IMAGE_EXTS", (".jpg", ".jpeg", ".png", ".webp", ".gif")))
 
+# Versi commit yang sedang berjalan - dipakai /api/health & /api/live agar
+# verifikasi "deploy sudah ter-update?" cukup dari browser, tanpa baca dashboard.
+# Railway mengisi RAILWAY_GIT_COMMIT_SHA saat deploy dari GitHub.
+COMMIT_SHA = (
+    os.getenv("RAILWAY_GIT_COMMIT_SHA")
+    or os.getenv("GIT_COMMIT")
+    or os.getenv("SOURCE_VERSION")
+    or "unknown"
+)[:12]
+
 app = Flask(__name__, static_folder=None)
 app.config["JSON_SORT_KEYS"] = False
 # Tidak memasang MAX_CONTENT_LENGTH: validasi ukuran dilakukan di
@@ -46,6 +57,19 @@ def json_error(message, status, **extra):
     payload = {"success": False, "message": message}
     payload.update(extra)
     return jsonify(payload), status
+
+
+def _log_exc(prefix, exc):
+    """Cetak pesan error + traceback penuh ke stderr.
+
+    Dipakai agar penyebab crash/gagal koneksi DB terlihat di log deploy,
+    bukan tertelan diam-diam (mis. di blok `except Exception: pass`).
+    """
+    import traceback
+
+    print(f"{prefix}: {exc}", file=sys.stderr, flush=True)
+    traceback.print_exc(file=sys.stderr)
+    sys.stderr.flush()
 
 
 def _file_ext(filename):
@@ -255,10 +279,29 @@ def _startup_init_db():
         db.ensure_all_tables()
         print("[startup] Skema database siap (products/reviews/admin_users).")
     except Exception as exc:  # noqa: BLE001
-        print(f"[startup] Peringatan: gagal menyiapkan tabel database: {exc}")
+        _log_exc("[startup] Peringatan: gagal menyiapkan tabel database", exc)
 
 
-_startup_init_db()
+def _startup_init_db_async():
+    """Jalankan _startup_init_db() di thread latar (NON-blocking).
+
+    PENTING untuk Railway: kalau DB lambat/tidak terjangkau, init tabel bisa
+    memakan connect_timeout=5s x beberapa percobaan. Menjalankannya langsung
+    saat import membuat gunicorn lama belum `listen`, sehingga healthcheck
+    Railway (healthcheckPath=/api/health) bisa timeout lebih dulu dan deploy
+    ditandai GAGAL/crash padahal aplikasi sehat. Karena itu init dijalankan
+    di daemon thread: gunicorn langsung listen, dan bila DB siap tabel
+    dibuat; bila belum, ensure_schema() akan mencobanya lagi saat request.
+    """
+    import threading
+
+    worker = threading.Thread(
+        target=_startup_init_db, name="startup-init-db", daemon=True
+    )
+    worker.start()
+
+
+_startup_init_db_async()
 
 
 # ---------------------------------------------------------------------
@@ -324,6 +367,18 @@ def session_status():
     return jsonify({"success": True, "auth": db.auth_enabled(), "authenticated": bool(ok)})
 
 
+@app.route("/api/live", methods=["GET"])
+def live():
+    """Liveness check SUPER RINGAN - sengaja TIDAK menyentuh database.
+
+    Dipakai Railway sebagai healthcheckPath. Tujuannya hanya memastikan proses
+    gunicorn sudah listen & melayani HTTP. Bila endpoint ini bergantung pada DB,
+    deploy akan ditandai gagal saat MySQL belum siap / lambat, padahal aplikasi
+    sebenarnya sehat. Status DB & config tetap bisa dicek lewat /api/health.
+    """
+    return jsonify({"success": True, "status": "alive", "commit": COMMIT_SHA})
+
+
 @app.route("/api/health", methods=["GET"])
 def health():
     """Health check untuk Railway/Render. Melaporkan status app & DB."""
@@ -337,14 +392,15 @@ def health():
 
     config_ok = not _CONFIG_PROBLEMS
     healthy = db_ok and config_ok
-    # Healthcheck HTTP tetap 200 selama DB jalan, supaya Railway tidak
-    # me-restart container hanya karena env belum diisi. Status rinci ada di
-    # field "status"/"config" agar mudah dicek dari browser.
-    http_status = 200 if db_ok else 503
+    # Healthcheck HTTP tetap 200 selama proses hidup, supaya Railway tidak
+    # me-restart container hanya karena DB atau env belum siap. Status rinci
+    # ada di field "status"/"config" agar mudah dicek dari browser.
+    http_status = 200
     return (
         jsonify({
             "success": healthy,
             "status": "ok" if healthy else "degraded",
+            "commit": COMMIT_SHA,
             "auth": db.auth_enabled(),
             "database": "ok" if db_ok else "error",
             "error": db_error,

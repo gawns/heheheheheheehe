@@ -12,6 +12,7 @@ import hmac
 import hashlib
 import json
 import os
+import sys
 import time
 
 import pymysql
@@ -185,14 +186,16 @@ def ensure_schema():
                 SET img = 'img/produk-sofa-klasik-marun.jpeg'
                 WHERE img IS NULL OR img = ''
             """)
-    except Exception:
-        pass
+    except Exception as exc:
+        # Migrasi gagal (mis. DB belum siap). Log supaya penyebabnya terlihat,
+        # tapi jangan crash: request berikutnya akan mencoba lagi.
+        print(f"[db] ensure_schema (products) gagal: {exc}", file=sys.stderr, flush=True)
 
     # Tabel ulasan (reviews) - dipakai halaman detail & panel admin
     try:
         ensure_reviews_table()
-    except Exception:
-        pass
+    except Exception as exc:
+        print(f"[db] ensure_schema (reviews) gagal: {exc}", file=sys.stderr, flush=True)
 
 
 def ensure_all_tables():
@@ -706,8 +709,12 @@ def ensure_admin_table():
                     f"INSERT INTO {ADMIN_TABLE} (username, password_hash) VALUES (%s, %s)",
                     (DEFAULT_ADMIN_USER, _hash_password(DEFAULT_ADMIN_PASS)),
                 )
-    except Exception:
-        pass
+    except Exception as exc:
+        # Jangan telan error: kalau tabel admin gagal dibuat/disemai, login
+        # admin akan selalu gagal - penyebabnya harus terlihat di log deploy.
+        print(f"[db] Gagal menyiapkan tabel {ADMIN_TABLE}: {exc}", file=sys.stderr, flush=True)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
 
 
 def auth_enabled() -> bool:
@@ -724,7 +731,10 @@ def check_admin_login(username: str, password: str) -> bool:
             f"SELECT password_hash FROM {ADMIN_TABLE} WHERE username = %s LIMIT 1",
             (str(username),),
         )
-    except Exception:
+    except Exception as exc:
+        # Koneksi/kueri gagal (mis. MySQL belum siap). Laporkan ke log supaya
+        # "login selalu gagal" tidak menjadi misteri saat deploy.
+        print(f"[db] check_admin_login gagal: {exc}", file=sys.stderr, flush=True)
         return False
     if not row:
         return False
