@@ -791,18 +791,47 @@ function initCatalogPage() {
 /* ===============================================================
    PRODUCT DETAIL PAGE (detail.html)
    =============================================================== */
-function initDetailPage() {
+async function fetchProductBySku(sku) {
+  // Ambil produk langsung dari API by SKU. Ini satu-satunya cara yang benar:
+  // daftar /api/products hanya berisi produk berstatus 'aktif', sehingga
+  // mencari produk di cache bisa gagal (produk draft/nonaktif atau cache basi).
+  try {
+    const res = await fetch(`${API_BASE}/products?sku=${encodeURIComponent(sku)}`, {
+      headers: { Accept: 'application/json' },
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success || !data.product) return null;
+    return data.product;
+  } catch {
+    return null;
+  }
+}
+
+async function initDetailPage() {
   const galleryMain = document.getElementById('gallery-main-img');
   if (!galleryMain) return;
 
   const params   = new URLSearchParams(window.location.search);
-  const skuParam = (params.get('sku') || '').trim().toUpperCase();
+  const skuParam = (params.get('sku') || '').trim();
   const id       = parseInt(params.get('id'), 10);
-  const products = getProducts();
-  const product  =
-    (skuParam ? products.find(p => (p.sku || '').toUpperCase() === skuParam) : null) ||
-    (id ? products.find(p => p.id === id) : null) ||
-    products[0];
+
+  // 1) Prioritas: muat langsung dari server by SKU (paling akurat).
+  let product = null;
+  if (skuParam) {
+    product = await fetchProductBySku(skuParam);
+  }
+
+  // 2) Fallback: cari di cache produk berdasarkan SKU (case-insensitive) / ID.
+  //    CATATAN: TIDAK ada fallback ke products[0] — kalau tidak ketemu, kita
+  //    tampilkan pesan "tidak ditemukan", bukan produk yang salah.
+  if (!product) {
+    const products = getProducts();
+    const wanted   = skuParam.toUpperCase();
+    product =
+      (wanted ? products.find(p => (p.sku || '').toUpperCase() === wanted) : null) ||
+      (id ? products.find(p => p.id === id) : null) ||
+      null;
+  }
 
   if (!product) {
     const main = document.querySelector('.product-detail');
@@ -1025,5 +1054,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 4. Baru render grid setelah data siap
   initFeaturedGrid();
   initCatalogPage();
-  initDetailPage();
+  try {
+    await initDetailPage();
+  } catch (err) {
+    console.error('Gagal memuat halaman detail:', err);
+  }
 });
