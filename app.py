@@ -167,7 +167,21 @@ def request_token():
     return None
 
 
+# Daftar masalah konfigurasi keamanan yang terdeteksi saat startup.
+# Bila tidak kosong, aplikasi tetap hidup (agar mudah di-debug & healthcheck
+# jalan) TAPI seluruh akses tulis/admin diblokir sampai env diperbaiki.
+_CONFIG_PROBLEMS = []
+
+
 def require_admin():
+    if _CONFIG_PROBLEMS:
+        return json_error(
+            "Panel admin dinonaktifkan: konfigurasi keamanan belum lengkap. "
+            "Periksa log deploy & set env (AUTH_SECRET, DEFAULT_ADMIN_PASS, dll).",
+            503,
+            auth=False,
+            config_error=True,
+        )
     if not db.verify_admin_token(request_token()):
         return json_error(
             "Akses ditolak. Silakan login ulang sebagai admin.", 401, auth=False
@@ -187,12 +201,18 @@ def _is_production():
 
 
 def security_selfcheck():
-    """Cegah aplikasi berjalan di produksi dengan konfigurasi tidak aman.
+    """Periksa konfigurasi keamanan saat produksi.
 
-    Dipanggil sekali saat modul di-import. Bila tidak aman -> raise RuntimeError
-    supaya deploy gagal cepat & jelas, bukan diam-diam tidak terlindungi.
+    Dipanggil sekali saat modul di-import. Bila ada masalah, aplikasi TETAP
+    dijalankan (supaya container hidup, log mudah dibaca, dan healthcheck bisa
+    diakses) TAPI seluruh endpoint admin/write diblokir lewat require_admin(),
+    serta healthcheck melaporkan status 'degraded'. Jadi tidak ada celah
+    keamanan, namun juga tidak crash total yang membingungkan.
     """
+    global _CONFIG_PROBLEMS
+
     if not _is_production():
+        _CONFIG_PROBLEMS = []
         return
 
     problems = []
@@ -205,12 +225,20 @@ def security_selfcheck():
     if db.DEFAULT_ADMIN_PASS in ("2026", "") and os.getenv("DEFAULT_ADMIN_PASS") is None:
         problems.append("DEFAULT_ADMIN_PASS masih default -> set DEFAULT_ADMIN_PASS yang kuat.")
 
+    _CONFIG_PROBLEMS = problems
+
     if problems:
-        raise RuntimeError(
-            "Konfigurasi produksi tidak aman:\n  - "
-            + "\n  - ".join(problems)
-            + "\nSet environment variable terkait lalu deploy ulang."
-        )
+        bar = "!" * 60
+        print(bar)
+        print("PERINGATAN KEAMANAN: konfigurasi produksi belum lengkap!")
+        for p in problems:
+            print(f"  - {p}")
+        print("Panel admin & operasi tulis DIBLOKIR sampai env diperbaiki.")
+        print("Set environment variable berikut di dashboard hosting lalu redeploy:")
+        print("  AUTH_SECRET=<string acak panjang>")
+        print("  DEFAULT_ADMIN_PASS=<password kuat>")
+        print("  APP_DEBUG=0")
+        print(bar)
 
 
 security_selfcheck()
@@ -307,16 +335,23 @@ def health():
         db_ok = False
         db_error = str(exc)
 
-    status = 200 if db_ok else 503
+    config_ok = not _CONFIG_PROBLEMS
+    healthy = db_ok and config_ok
+    # Healthcheck HTTP tetap 200 selama DB jalan, supaya Railway tidak
+    # me-restart container hanya karena env belum diisi. Status rinci ada di
+    # field "status"/"config" agar mudah dicek dari browser.
+    http_status = 200 if db_ok else 503
     return (
         jsonify({
-            "success": db_ok,
-            "status": "ok" if db_ok else "degraded",
+            "success": healthy,
+            "status": "ok" if healthy else "degraded",
             "auth": db.auth_enabled(),
             "database": "ok" if db_ok else "error",
             "error": db_error,
+            "config": "ok" if config_ok else "incomplete",
+            "config_problems": list(_CONFIG_PROBLEMS),
         }),
-        status,
+        http_status,
     )
 
 
