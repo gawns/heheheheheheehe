@@ -807,6 +807,81 @@ async function fetchProductBySku(sku) {
   }
 }
 
+/* ---------- Detail page: helper untuk state template ---------- */
+function setDetailStatus(message, isError) {
+  const statusEl = document.getElementById('product-detail-status');
+  if (!statusEl) return;
+  if (!message) { statusEl.hidden = true; statusEl.textContent = ''; return; }
+  statusEl.hidden = false;
+  statusEl.textContent = message;
+  statusEl.classList.toggle('empty-state--error', Boolean(isError));
+}
+
+function showDetailContent(show) {
+  const gallery = document.getElementById('product-gallery');
+  const info    = document.getElementById('product-info');
+  if (gallery) gallery.hidden = !show;
+  if (info) info.hidden = !show;
+  const detail = document.getElementById('product-detail');
+  if (detail) detail.dataset.state = show ? 'ready' : 'empty';
+}
+
+/* Redirect ke halaman 404 (dipakai saat produk/SKU tidak ditemukan). */
+function goTo404() {
+  window.location.replace('404.html');
+}
+
+/* ---------- Detail page: render galeri dari data produk ---------- */
+function renderDetailGallery(product) {
+  const galleryMain = document.getElementById('gallery-main-img');
+  const thumbsWrap  = document.getElementById('product-thumbs-container');
+  if (!galleryMain) return;
+
+  // Kumpulkan sumber foto: foto utama + foto tambahan (unik, tanpa duplikat).
+  const sources = [];
+  const push = (src) => { if (src && !sources.includes(src)) sources.push(src); };
+  push(product.img);
+  (Array.isArray(product.images) ? product.images : []).forEach(push);
+
+  if (!sources.length) {
+    galleryMain.removeAttribute('src');
+    if (thumbsWrap) thumbsWrap.innerHTML = '';
+    return;
+  }
+
+  galleryMain.src = sources[0];
+  galleryMain.alt = product.imgAlt || product.name || 'Foto produk';
+
+  if (!thumbsWrap) return;
+  thumbsWrap.innerHTML = '';
+
+  // Thumb hanya perlu ditampilkan kalau ada lebih dari 1 foto.
+  if (sources.length < 2) return;
+
+  const fragment = document.createDocumentFragment();
+  sources.forEach((src, index) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'thumb-btn' + (index === 0 ? ' active' : '');
+    btn.setAttribute('role', 'listitem');
+    btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+    btn.setAttribute('aria-label', `Foto ${index + 1} dari ${sources.length}`);
+    btn.dataset.src = src;
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    img.width = 200;
+    img.height = 180;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+
+    btn.appendChild(img);
+    fragment.appendChild(btn);
+  });
+  thumbsWrap.appendChild(fragment);
+}
+
 async function initDetailPage() {
   const galleryMain = document.getElementById('gallery-main-img');
   if (!galleryMain) return;
@@ -814,6 +889,10 @@ async function initDetailPage() {
   const params   = new URLSearchParams(window.location.search);
   const skuParam = (params.get('sku') || '').trim();
   const id       = parseInt(params.get('id'), 10);
+
+  // Template dulu: sembunyikan konten, tampilkan status "memuat".
+  showDetailContent(false);
+  setDetailStatus('Memuat produk...', false);
 
   // 1) Prioritas: muat langsung dari server by SKU (paling akurat).
   let product = null;
@@ -824,22 +903,22 @@ async function initDetailPage() {
   // 2) Fallback: cari di cache produk berdasarkan SKU (case-insensitive) / ID.
   //    CATATAN: TIDAK ada fallback ke products[0] — kalau tidak ketemu, kita
   //    tampilkan pesan "tidak ditemukan", bukan produk yang salah.
+  const products = getProducts();
   if (!product) {
-    const products = getProducts();
-    const wanted   = skuParam.toUpperCase();
+    const wanted = skuParam.toUpperCase();
     product =
       (wanted ? products.find(p => (p.sku || '').toUpperCase() === wanted) : null) ||
       (id ? products.find(p => p.id === id) : null) ||
       null;
   }
 
+  // 3) Tidak ketemu -> langsung ke halaman 404.html.
   if (!product) {
-    const main = document.querySelector('.product-detail');
-    if (main) main.innerHTML = '<div class="container"><p class="empty-state">Produk tidak ditemukan. <a href="katalog.html">Kembali ke katalog</a></p></div>';
+    goTo404();
     return;
   }
 
-  if (product) {
+  {
     document.title = `${product.name} - Ine Mebel Jepara`;
 
     // Statistik: catat produk yang dilihat + halaman detail ini.
@@ -849,11 +928,13 @@ async function initDetailPage() {
     const crumb = document.getElementById('breadcrumb-product');
     if (crumb) crumb.textContent = product.name;
 
-    galleryMain.src = product.img;
-    galleryMain.alt = product.imgAlt || product.name;
+    // Galeri + thumbnail dibangun dari data produk (tanpa mapping hardcode).
+    renderDetailGallery(product);
 
-    const catEl = document.querySelector('.product-info__category');
-    if (catEl) catEl.textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+    const catEl = document.getElementById('product-category');
+    if (catEl) catEl.textContent = product.category
+      ? product.category.charAt(0).toUpperCase() + product.category.slice(1)
+      : '';
 
     const nameEl = document.getElementById('product-name');
     if (nameEl) nameEl.textContent = product.name;
@@ -871,7 +952,13 @@ async function initDetailPage() {
     if (codeEl && product.sku) codeEl.textContent = `#${product.sku}`;
 
     const descEl = document.querySelector('.product-info__desc');
-    if (descEl) descEl.textContent = product.desc;
+    if (descEl) descEl.textContent = product.desc || '';
+
+    const warnaEl = document.getElementById('spec-warna');
+    if (warnaEl) warnaEl.textContent = product.warna || '-';
+
+    const pelengkapEl = document.getElementById('spec-pelengkap');
+    if (pelengkapEl) pelengkapEl.textContent = product.pelengkap || '-';
 
     const materialEl = document.getElementById('spec-material');
     if (materialEl) materialEl.textContent = product.material || '-';
@@ -892,14 +979,6 @@ async function initDetailPage() {
 
     const garansiEl = document.getElementById('spec-garansi');
     if (garansiEl) garansiEl.textContent = product.garansi || '-';
-
-    const variantsContainer = document.getElementById('product-variants-container');
-    const thumbsContainer = document.getElementById('product-thumbs-container');
-    if (product.warna) {
-      if (variantsContainer) variantsContainer.style.display = '';
-    } else {
-      if (variantsContainer) variantsContainer.style.display = 'none';
-    }
 
     const consultLink = document.querySelector('.consult-cta a');
     if (consultLink) {
@@ -922,33 +1001,29 @@ async function initDetailPage() {
 
     // Muat ulasan produk ini dari API.
     loadProductReviews(product);
+
+    // Tampilkan konten hanya setelah semuanya terisi.
+    showDetailContent(true);
+    setDetailStatus('', false);
   }
 
-  const thumbBtns = document.querySelectorAll('.thumb-btn');
-  thumbBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const src = btn.querySelector('img')?.src;
+  // ---- Thumbnail: delegated, karena tombol digenerate dinamis ----
+  const thumbsWrap = document.getElementById('product-thumbs-container');
+  if (thumbsWrap) {
+    thumbsWrap.addEventListener('click', (event) => {
+      const btn = event.target.closest('.thumb-btn');
+      if (!btn || !thumbsWrap.contains(btn)) return;
+      const src = btn.dataset.src;
       if (!src) return;
-      thumbBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
+      thumbsWrap.querySelectorAll('.thumb-btn').forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
       galleryMain.style.opacity = '0';
       galleryMain.style.transition = 'opacity 180ms ease';
       setTimeout(() => { galleryMain.src = src; galleryMain.style.opacity = '1'; }, 160);
     });
-  });
-
-  const swatches = document.querySelectorAll('.color-swatch');
-  function selectColor(colorName) {
-    swatches.forEach(s => {
-      const active = s.dataset.color === colorName;
-      s.classList.toggle('active', active);
-      s.setAttribute('aria-pressed', String(active));
-    });
-    const selectedText = document.getElementById('variants-selected-text');
-    if (selectedText) selectedText.innerHTML = `Warna terpilih: <strong>${escapeHTML(colorName)}</strong>`;
   }
-  swatches.forEach(s => s.addEventListener('click', () => selectColor(s.dataset.color)));
 
   const wishlistBtn = document.querySelector('.wishlist-btn');
   if (wishlistBtn && product) {
@@ -980,11 +1055,7 @@ function formatReviewDate(value) {
 
 async function loadProductReviews(product) {
   const listWrap = document.getElementById('reviews-list');
-  const scoreEl  = document.querySelector('.rating-score');
-  const countEl  = document.querySelector('.rating-count');
-  const starsEl  = document.querySelector('.product-info__rating .stars');
-
-  if (!listWrap && !scoreEl) return;
+  if (!listWrap) return;
 
   let data = null;
   try {
@@ -997,14 +1068,6 @@ async function loadProductReviews(product) {
   }
 
   const reviews = (data && data.success && Array.isArray(data.reviews)) ? data.reviews : [];
-  const count   = data && data.success ? Number(data.count || 0) : 0;
-  const average = data && data.success ? Number(data.average || 0) : 0;
-
-  if (scoreEl) scoreEl.textContent = average ? average.toFixed(1) : '—';
-  if (countEl) countEl.textContent = `(${count} ulasan)`;
-  if (starsEl) starsEl.textContent = renderStars(average);
-
-  if (!listWrap) return;
 
   if (!reviews.length) {
     listWrap.innerHTML = '<p class="empty-state">Belum ada ulasan untuk produk ini.</p>';

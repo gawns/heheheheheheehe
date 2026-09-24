@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halaman Tidak Ditemukan - Ine Mebel Jepara</title>
+  <meta name="description" content="Halaman atau produk yang kamu cari tidak ditemukan." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/jpeg" href="img/logo.jpeg" />
+  <link rel="apple-touch-icon" href="img/logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="no-intro">
+
+  <!-- NAVBAR -->
+  <header id="navbar" class="navbar navbar--solid">
+    <div class="navbar__inner container">
+      <a href="index.html" class="navbar__logo" aria-label="Ine Mebel Jepara - Beranda">
+        <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+        <span class="logo-text">Ine Mebel Jepara</span>
+      </a>
+
+      <nav class="navbar__nav" aria-label="Navigasi utama">
+        <ul role="list">
+          <li><a href="katalog.html">Katalog</a></li>
+          <li><a href="index.html#tentang">Tentang</a></li>
+          <li><a href="index.html#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="nav-menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka menu">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Menu mobile" hidden>
+      <ul role="list">
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="index.html#tentang">Tentang</a></li>
+        <li><a href="index.html#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="error-page" aria-labelledby="error-title">
+      <div class="container error-page__inner">
+        <p class="error-page__code" aria-hidden="true">404</p>
+        <h1 class="error-page__title" id="error-title">Halaman tidak ditemukan</h1>
+        <p class="error-page__text">
+          Maaf, halaman atau produk yang kamu cari tidak tersedia. Kemungkinan tautan salah,
+          produk sudah dihapus, atau alamatnya sudah berubah.
+        </p>
+        <div class="error-page__actions">
+          <a href="index.html" class="btn btn--primary btn--lg">Kembali ke Beranda</a>
+          <a href="katalog.html" class="btn btn--outline btn--lg">Lihat Katalog</a>
+        </div>
+        <p class="error-page__help">
+          Butuh bantuan? <a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20butuh%20bantuan%20mencari%20produk%20mebel." target="_blank" rel="noopener noreferrer">Hubungi kami via WhatsApp</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer" id="kontak">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="footer__logo" aria-label="Ine Mebel Jepara - Beranda">
+          <img class="logo-mark logo-mark--img" src="img/logo.jpeg" alt="Logo Ine Mebel Jepara" aria-hidden="true" />
+          <span>Ine Mebel Jepara</span>
+        </a>
+        <p class="footer__tagline">Mebel berkualitas dari tangan pengrajin Jepara sejak 2012.</p>
+      </div>
+      <div class="footer__nav-group">
+        <h3 class="footer__nav-title">Produk</h3>
+        <ul role="list">
+          <li><a href="katalog.html?kategori=kursi">Kursi</a></li>
+          <li><a href="katalog.html?kategori=meja">Meja</a></li>
+          <li><a href="katalog.html?kategori=sofa">Sofa</a></li>
+          <li><a href="katalog.html?kategori=lemari">Lemari</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact">
+        <h3 class="footer__nav-title">Kontak</h3>
+        <address>
+          <p>RT.27/RW.06, Bawu III, Bawu, Kec. Batealit, Kabupaten Jepara, Jawa Tengah 59461</p>
+          <p><a href="https://wa.me/6283114241995" target="_blank" rel="noopener noreferrer">0831-1424-1995</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2026 Ine Mebel Jepara. Semua hak dilindungi.</p>
+        <a href="admin.html" class="footer__admin-link">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

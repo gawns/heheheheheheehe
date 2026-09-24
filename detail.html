@@ -71,109 +71,80 @@
         <ol class="breadcrumb" role="list">
           <li><a href="index.html">Beranda</a></li>
           <li><a href="katalog.html">Katalog</a></li>
-          <li aria-current="page" id="breadcrumb-product">Kursi Tamarind</li>
+          <li aria-current="page" id="breadcrumb-product">Detail Produk</li>
         </ol>
       </nav>
     </div>
 
-    <!-- PRODUCT DETAIL -->
-    <section class="product-detail" aria-labelledby="product-name">
+    <!-- PRODUCT DETAIL (template / skeleton — diisi oleh script.js setelah data produk siap) -->
+    <section class="product-detail" id="product-detail" aria-labelledby="product-name" data-state="loading">
       <div class="container product-detail__inner">
 
+        <!-- Status: memuat / tidak ditemukan (dikontrol script.js) -->
+        <p class="empty-state product-detail__status" id="product-detail-status" role="status">Memuat produk...</p>
+
         <!-- Gallery -->
-        <div class="product-gallery">
+        <div class="product-gallery" id="product-gallery" hidden>
           <div class="product-gallery__main">
             <img
               id="gallery-main-img"
-              src="img/produk-sofa-klasik-marun.jpeg"
-              alt="Sofa klasik marun - tampak depan"
+              alt=""
               width="900"
               height="800"
-              fetchpriority="high"
+              decoding="async"
               class="product-gallery__main-img"
             />
           </div>
           <div class="product-gallery__thumbs" id="product-thumbs-container" role="list" aria-label="Galeri foto produk">
-            <button class="thumb-btn active" aria-label="Foto 1 - tampak depan" aria-pressed="true">
-              <img src="img/produk-sofa-klasik-marun.jpeg" alt="" width="200" height="180" />
-            </button>
-            <button class="thumb-btn" aria-label="Foto 2 - sudut serong" aria-pressed="false">
-              <img src="img/produk-lemari-2-pintu-rotan.jpeg" alt="" width="200" height="180" />
-            </button>
-            <button class="thumb-btn" aria-label="Foto 3 - detail serat kayu" aria-pressed="false">
-              <img src="img/produk-lemari-3-pintu-rotan.jpeg" alt="" width="200" height="180" />
-            </button>
-            <button class="thumb-btn" aria-label="Foto 4 - ruang" aria-pressed="false">
-              <img src="img/produk-wa-01.jpeg" alt="" width="200" height="180" />
-            </button>
+            <!-- Injected by script.js dari data produk -->
           </div>
         </div>
 
         <!-- Product Info -->
-        <div class="product-info">
+        <div class="product-info" id="product-info" hidden>
           <div class="product-info__meta">
-            <span class="product-info__code" id="product-code">#JPA-001</span>
-            <span class="product-info__category">Kursi</span>
+            <span class="product-info__code" id="product-code"></span>
+            <span class="product-info__category" id="product-category"></span>
           </div>
-          <h1 class="product-info__name" id="product-name">Kursi Tamarind</h1>
-
-          <div class="product-info__rating" aria-label="Rating 4.8 dari 5">
-            <span class="stars" aria-hidden="true">★★★★★</span>
-            <span class="rating-score">4.8</span>
-            <span class="rating-count">(32 ulasan)</span>
-          </div>
+          <h1 class="product-info__name" id="product-name"></h1>
 
           <p class="product-info__price">
-            <span class="price-main">Rp 3.850.000</span>
+            <span class="price-main"></span>
           </p>
 
-          <p class="product-info__desc">
-            Kursi makan bergaya modern dari kayu jati grade A. Rangka solid dengan konstruksi sambungan baji tradisional Jepara yang terbukti tahan puluhan tahun. Bantalan duduk berbahan busa high-density dibalut kain katun tenun alami, nyaman untuk penggunaan sehari-hari.
-          </p>
+          <p class="product-info__desc"></p>
 
           <!-- Material & Dimensi -->
           <dl class="product-specs">
             <div class="spec-row">
               <dt>Dari Pohon / Kayu</dt>
-              <dd id="spec-material">Kayu jati grade A solid</dd>
+              <dd id="spec-material">-</dd>
             </div>
             <div class="spec-row">
               <dt>Pilihan Warna</dt>
-              <dd id="spec-warna">Krem alami, Cokelat tembakau, Abu-abu premium, Hitam arang</dd>
+              <dd id="spec-warna">-</dd>
             </div>
             <div class="spec-row">
               <dt>Dimensi</dt>
-              <dd id="spec-dimensi">P 52 x L 55 x T 88 cm (tinggi dudukan 45 cm)</dd>
+              <dd id="spec-dimensi">-</dd>
             </div>
             <div class="spec-row">
               <dt>Berat</dt>
-              <dd id="spec-berat">8,5 kg</dd>
+              <dd id="spec-berat">-</dd>
             </div>
             <div class="spec-row">
               <dt>Finishing</dt>
-              <dd id="spec-finishing">Natural oil, semi-gloss</dd>
+              <dd id="spec-finishing">-</dd>
             </div>
             <div class="spec-row">
               <dt>Garansi</dt>
-              <dd id="spec-garansi">5 tahun rangka, 1 tahun bantalan</dd>
+              <dd id="spec-garansi">-</dd>
             </div>
             <div class="spec-row">
               <dt>Produk Pelengkap</dt>
-              <dd id="spec-pelengkap">Meja</dd>
+              <dd id="spec-pelengkap">-</dd>
             </div>
           </dl>
-
-          <!-- Varian warna -->
-          <div class="product-variants" id="product-variants-container">
-            <h2 class="variants-label">Pilihan varian warna</h2>
-            <div class="color-options" id="color-options-wrap" role="group" aria-label="Pilihan warna">
-              <button class="color-swatch active" style="--swatch-color: #D4C5A9;" data-color="Krem" aria-label="Krem alami" aria-pressed="true" title="Krem alami"></button>
-              <button class="color-swatch" style="--swatch-color: #8B7355;" data-color="Cokelat" aria-label="Cokelat tembakau" aria-pressed="false" title="Cokelat tembakau"></button>
-              <button class="color-swatch" style="--swatch-color: #9CA3AF;" data-color="Abu-abu" aria-label="Abu-abu premium" aria-pressed="false" title="Abu-abu premium"></button>
-              <button class="color-swatch" style="--swatch-color: #1F2937;" data-color="Hitam" aria-label="Hitam arang" aria-pressed="false" title="Hitam arang"></button>
-            </div>
-            <p class="variants-selected-label" id="variants-selected-text">Warna terpilih: <strong>Krem</strong></p>
-          </div>
 
           <!-- Actions: Chat WhatsApp (Quantity removed) -->
           <div class="product-actions">
@@ -274,11 +245,6 @@
   <!-- FLOATING WHATSAPP BUTTON -->
   <a href="https://wa.me/6283114241995?text=Halo%2C%20saya%20ingin%20tanya%20tentang%20produk%20mebel." class="fab-whatsapp" id="fab-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Hubungi kami via WhatsApp">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-  </a>
-
-  <a href="admin.html" class="fab-admin" aria-label="Buka panel admin">
-    <img class="fab-admin__mark" src="img/logo.jpeg" alt="" aria-hidden="true" style="object-fit:cover" />
-    Admin
   </a>
 
   <script src="script.js"></script>

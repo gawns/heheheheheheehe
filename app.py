@@ -853,6 +853,10 @@ def reviews_delete():
 def not_found(_e):
     if request.path.startswith("/api/"):
         return json_error("Endpoint tidak ditemukan.", 404)
+    # Untuk halaman biasa, tampilkan 404.html (bukan JSON).
+    page = os.path.join(BASE_DIR, "404.html")
+    if os.path.isfile(page):
+        return send_from_directory(BASE_DIR, "404.html"), 404
     return json_error("Halaman tidak ditemukan.", 404)
 
 
